@@ -5,11 +5,26 @@ import { ItemValue } from "../Item";
 export default function useItems() {
   const [items, setItems] = useState<ItemValue[]>([]);
 
-  const onItemAdd = () => {
-    setItems((prevItems) => [
-      ...prevItems,
+  const onNormalItemAdd = () => {
+    setItems([
+      ...items,
       { key: uuid(), value: "", sing: "", type: "normal", isCheck: false },
     ]);
+  };
+
+  const onQueryItemAdd = () => {
+    setItems([
+      ...items,
+      { key: uuid(), value: "", sing: "", type: "query", isCheck: false },
+    ]);
+  };
+
+  const onChangeCheckToggle = (key: string) => {
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.key === key ? { ...item, isCheck: !item.isCheck } : item
+      )
+    );
   };
 
   const onItemDelete = useCallback(
@@ -19,9 +34,16 @@ export default function useItems() {
     [items]
   );
 
+  const onSave = () => {
+    return items;
+  };
+
   return {
     items,
-    onItemAdd,
+    onNormalItemAdd,
+    onQueryItemAdd,
     onItemDelete,
+    onChangeCheckToggle,
+    onSave,
   };
 }
