@@ -2,17 +2,20 @@
 "use client";
 
 import { JSX, useMemo } from "react";
-import Item from "./Item";
+import Item, { ItemValue } from "./Item";
 import useItems from "./hooks/items";
 
-export default function ItemList() {
+type ItemListProps = {
+  onSaveItems: (items: ItemValue[]) => void;
+};
+
+export default function ItemList({ onSaveItems }: ItemListProps) {
   const {
     items,
     onNormalItemAdd,
     onQueryItemAdd,
     onItemDelete,
     onChangeCheckToggle,
-    onSave,
   } = useItems();
 
   const itemsMemo = useMemo<JSX.Element[]>(() => {
@@ -41,13 +44,7 @@ export default function ItemList() {
           <button className="border p-1" onClick={onQueryItemAdd}>
             クエリーアイテム追加
           </button>
-          <button
-            className="border p-1"
-            onClick={() => {
-              const saveData = onSave();
-              alert(JSON.stringify(saveData));
-            }}
-          >
+          <button className="border p-1" onClick={() => onSaveItems(items)}>
             保存
           </button>
         </div>

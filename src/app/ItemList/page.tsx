@@ -1,5 +1,5 @@
-import ItemList from "@/features/ItemList/ItemList";
+import Index from "@/features/ItemList";
 
 export default function Page() {
-  return <ItemList />;
+  return <Index />;
 }

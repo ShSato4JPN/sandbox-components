@@ -34,16 +34,11 @@ export default function useItems() {
     [items]
   );
 
-  const onSave = () => {
-    return items;
-  };
-
   return {
     items,
     onNormalItemAdd,
     onQueryItemAdd,
     onItemDelete,
     onChangeCheckToggle,
-    onSave,
   };
 }
