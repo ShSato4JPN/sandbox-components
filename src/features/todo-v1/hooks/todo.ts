@@ -31,9 +31,11 @@ export default function useTodos() {
 
   const filteredTodo = todos
     .filter((todo) => {
+      // 曖昧検索
       return filterWord === "" ? true : todo.description.includes(filterWord);
     })
     .filter((todo) => {
+      // 完了ステータスのフィルタリング
       if (filterCompleteStatus === "all") {
         return true;
       } else if (filterCompleteStatus === "completed") {
@@ -43,6 +45,7 @@ export default function useTodos() {
       }
     })
     .filter((todo) => {
+      // カテゴリのフィルタリング
       if (filterCategory === "all") {
         return true;
       } else {
