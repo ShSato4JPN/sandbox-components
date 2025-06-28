@@ -1,11 +1,11 @@
-import { useAtom } from "jotai";
 import {
   filterCategoryAtom,
   filterCompleteStatusAtom,
   filterWordAtom,
   TodoItem,
   todosAtom,
-} from "../store/todo";
+} from "@/features/todo-v1/store/todo";
+import { useAtom } from "jotai";
 
 export default function useTodos() {
   const [todos, setTodos] = useAtom(todosAtom);
@@ -23,6 +23,10 @@ export default function useTodos() {
     setTodos((prevTodos) =>
       prevTodos.map((todo) => (todo.id === changedTodo.id ? changedTodo : todo))
     );
+  };
+
+  const deleteTodo = (id: string) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
 
   const filteredTodo = todos
@@ -54,6 +58,7 @@ export default function useTodos() {
     unCompletedTodoCount: todos.filter((todo) => !todo.isCompleted).length,
     addTodo,
     updateTodo,
+    deleteTodo,
     setFilterWord,
     setFilterCategory,
     setFilterCompleteStatus,

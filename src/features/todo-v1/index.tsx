@@ -1,6 +1,6 @@
-import TodoEdit from "./todo-edit";
-import TodoSearch from "./todo-search";
-import TodoStatus from "./todo-status";
+import TodoEdit from "@/features/todo-v1/todo-edit";
+import TodoSearch from "@/features/todo-v1/todo-search";
+import TodoStatus from "@/features/todo-v1/todo-status";
 
 export default function TodoV1() {
   return (

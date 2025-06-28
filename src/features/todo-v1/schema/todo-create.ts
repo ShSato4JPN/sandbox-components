@@ -1,5 +1,5 @@
+import { CATEGORY, PRIORITY } from "@/features/todo-v1/constant/todo";
 import z from "zod";
-import { CATEGORY, PRIORITY } from "../constant/todo";
 
 export const todoCreateScheme = z.object({
   description: z

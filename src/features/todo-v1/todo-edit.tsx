@@ -1,12 +1,12 @@
 "use client";
 
+import useTodos from "@/features/todo-v1/hooks/todo";
+import { getCategoryLabel } from "@/features/todo-v1/util/category";
+import { getPriorityLabel } from "@/features/todo-v1/util/priority";
 import clsx from "clsx";
 import { Check, Circle, Pencil, Tag, Trash2, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
-import useTodos from "./hooks/todo";
 import { TodoItem } from "./store/todo";
-import { getCategoryLabel } from "./util/category";
-import { getPriorityLabel } from "./util/priority";
 
 type EditingTodoProps = {
   todo: TodoItem;
@@ -79,7 +79,7 @@ function EditingTodo({ todo, onEditEnd, onUpdate }: EditingTodoProps) {
 }
 
 export default function TodoEdit() {
-  const { filteredTodo, updateTodo } = useTodos();
+  const { filteredTodo, updateTodo, deleteTodo } = useTodos();
   const [isEditing, setIsEditing] = useState<string>("");
 
   console.table(filteredTodo);
@@ -153,13 +153,17 @@ export default function TodoEdit() {
                   className="cursor-pointer text-blue-500"
                   onClick={() => setIsEditing(todo.id)}
                 />
-                <Trash2 size={20} className="cursor-pointer text-red-500" />
+                <Trash2
+                  size={20}
+                  className="cursor-pointer text-red-500"
+                  onClick={() => deleteTodo(todo.id)}
+                />
               </div>
             </div>
           )}
         </li>
       )),
-    [isEditing, filteredTodo, updateTodo]
+    [filteredTodo, isEditing, updateTodo, deleteTodo]
   );
 
   return (

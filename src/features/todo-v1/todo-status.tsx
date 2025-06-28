@@ -1,9 +1,9 @@
 "use client";
 
+import useTodo from "@/features/todo-v1/hooks/todo";
+import TodoCreate from "@/features/todo-v1/todo-create";
 import { Plus } from "lucide-react";
 import { useState } from "react";
-import useTodo from "./hooks/todo";
-import TodoCreate from "./todo-create";
 
 export default function TodoStatus() {
   const { allTodosCount, completedTodoCount, unCompletedTodoCount } = useTodo();
