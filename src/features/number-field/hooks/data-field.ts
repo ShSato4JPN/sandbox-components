@@ -81,13 +81,13 @@ export function useDataField() {
   useEffect(() => {
     const selectedFieldCode = getSelectedField(fieldCode);
     // 初回登録時
-    if (!fieldCode && selectedFieldCode) {
+    if (fieldCode === null && selectedFieldCode !== undefined) {
+      setFieldCode(selectedFieldCode);
+
       const field = getField(selectedFieldCode);
       if (isNumericField(selectedFieldCode)) {
         updateNumericField(field);
       }
-
-      setFieldCode(selectedFieldCode);
     }
   }, [
     fieldCode,
