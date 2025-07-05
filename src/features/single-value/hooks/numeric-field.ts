@@ -4,7 +4,7 @@ import {
   scaleAtom,
   unitAtom,
   unitPositionAtom,
-} from "../store/fiels";
+} from "../store/single-value";
 
 export default function useNumericField() {
   const [digit, setDigit] = useAtom(digitAtom);

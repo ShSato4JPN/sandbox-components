@@ -1,5 +1,5 @@
 import { useAtom, useSetAtom } from "jotai";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect } from "react";
 import { AVAILABLE_FIELDS, data } from "../constant/field";
 import {
   digitAtom,
@@ -7,7 +7,7 @@ import {
   scaleAtom,
   unitAtom,
   unitPositionAtom,
-} from "../store/fiels";
+} from "../store/single-value";
 import { DataField } from "../types/field";
 
 type AvailableField = Extract<
@@ -30,15 +30,18 @@ export function useDataField() {
   const isAvailableField = (field: DataField): field is AvailableField =>
     (AVAILABLE_FIELDS as readonly DataField["type"][]).includes(field.type);
 
-  const availableFields = data.filter(isAvailableField);
+  const allFields = data.map((field) => ({ ...field }));
+
+  const availableFields = data
+    .filter(isAvailableField)
+    .map((field) => ({ ...field }));
+
+  const selectedAvailableFieldLabel =
+    availableFields.find((field) => field.code === fieldCode)?.label || "";
 
   // 現在選択されているフィールドコードが数値系のフィールドであるか判定する
-  const isNumeric = useMemo(
-    () =>
-      ["CALC", "NUMBER"].includes(
-        availableFields.find((field) => field.code === fieldCode)?.type || ""
-      ),
-    [availableFields, fieldCode]
+  const isNumeric = ["CALC", "NUMBER"].includes(
+    availableFields.find((field) => field.code === fieldCode)?.type || ""
   );
 
   // 引数で渡されたフィールドコードが数値系のフィールドであるか判定する
@@ -112,8 +115,10 @@ export function useDataField() {
   );
 
   return {
+    allFields,
     fieldCode,
     availableFields,
+    selectedAvailableFieldLabel,
     isNumeric,
     onFieldCodeChange,
   };
