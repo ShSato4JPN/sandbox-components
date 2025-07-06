@@ -32,9 +32,9 @@ export function useDataField() {
 
   const allFields = data.map((field) => ({ ...field }));
 
-  const availableFields = data
-    .filter(isAvailableField)
-    .map((field) => ({ ...field }));
+  const availableFields = data.filter(isAvailableField);
+
+  const firstFieldCode = allFields.at(0)?.code;
 
   const selectedAvailableFieldLabel =
     availableFields.find((field) => field.code === fieldCode)?.label || "";
@@ -117,6 +117,7 @@ export function useDataField() {
   return {
     allFields,
     fieldCode,
+    firstFieldCode,
     availableFields,
     selectedAvailableFieldLabel,
     isNumeric,

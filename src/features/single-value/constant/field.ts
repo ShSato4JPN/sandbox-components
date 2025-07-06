@@ -9,10 +9,14 @@ export const AVAILABLE_FIELDS = [
 
 export const data: DataField[] = [
   {
-    type: "TEXT",
-    code: "text_1",
-    label: "テキスト１",
-    value: "text",
+    type: "CHECK_BOX",
+    code: "checkbox_1",
+    label: "チェックボックス",
+    value: [
+      { key: "aaa", value: "AAA", check: true },
+      { key: "bbb", value: "BBB", check: false },
+      { key: "ccc", value: "CCC", check: false },
+    ],
   },
   {
     type: "NUMBER",
@@ -23,6 +27,12 @@ export const data: DataField[] = [
     scale: 0,
     unit: "¥",
     unitPosition: "BEFORE",
+  },
+  {
+    type: "TEXT",
+    code: "text_1",
+    label: "テキスト１",
+    value: "text",
   },
   {
     type: "NUMBER",
@@ -62,16 +72,7 @@ export const data: DataField[] = [
     unit: "¥",
     unitPosition: "BEFORE",
   },
-  {
-    type: "CHECK_BOX",
-    code: "checkbox_1",
-    label: "チェックボックス",
-    value: [
-      { key: "aaa", value: "AAA", check: true },
-      { key: "bbb", value: "BBB", check: false },
-      { key: "ccc", value: "CCC", check: false },
-    ],
-  },
+
   {
     type: "DROP_DOWN",
     code: "dropdown_1",
